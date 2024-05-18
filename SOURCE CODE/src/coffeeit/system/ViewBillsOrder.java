@@ -14,6 +14,7 @@ import java.util.Iterator;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import model.Bill;
+import java.text.DecimalFormat;
 
 /**
  *
@@ -24,6 +25,8 @@ public class ViewBillsOrder extends javax.swing.JFrame {
     /**
      * Creates new form ViewBillsOrder
      */
+    private DecimalFormat decimalFormat = new DecimalFormat("#,##0");
+
     public ViewBillsOrder() {
         initComponents();
         SimpleDateFormat dFormat = new SimpleDateFormat("dd-MM-yyy");
@@ -37,13 +40,14 @@ public class ViewBillsOrder extends javax.swing.JFrame {
         String incDec = (String) cbIncDesc.getSelectedItem();
         DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
         dtm.setRowCount(0);
+        double revenue = 0;
         if(incDec.equals("INC")){
             ArrayList<Bill> list = BillControler.getAllRecordsByInc(date);
             Iterator<Bill> itr = list.iterator();
             while(itr.hasNext()){
                 Bill billObj = itr.next();
                 dtm.addRow(new Object[] {billObj.getId(), billObj.getName(), billObj.getMobileNumber(), billObj.getEmail(), billObj.getDate(), billObj.getTotal(), billObj.getCreateBy()});
-                
+                revenue += Double.parseDouble(billObj.getTotal().replace(",", ""));
             }
         }
         else
@@ -53,10 +57,12 @@ public class ViewBillsOrder extends javax.swing.JFrame {
             while(itr.hasNext()){
                 Bill billObj = itr.next();
                 dtm.addRow(new Object[] {billObj.getId(), billObj.getName(), billObj.getMobileNumber(), billObj.getEmail(), billObj.getDate(), billObj.getTotal(), billObj.getCreateBy()});
-                
+                revenue += Double.parseDouble(billObj.getTotal().replace(",", ""));
+
             }
-            
         }
+        dtm.addRow(new Object[] {"", "", "", "", "", "", ""});
+        dtm.addRow(new Object[] {"", "", "", "", "REVENUE", decimalFormat.format(revenue), ""});
     }
 
     /**
@@ -89,9 +95,8 @@ public class ViewBillsOrder extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/View Bills & Order Placed Details.png"))); // NOI18N
-        jLabel1.setText("View Bills & Order Placed Details");
+        jLabel1.setText("View Bill's  Details");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, -1, -1));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/close.png"))); // NOI18N
@@ -103,7 +108,6 @@ public class ViewBillsOrder extends javax.swing.JFrame {
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1314, 9, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Fillter by Date");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(181, 145, -1, -1));
 
@@ -116,9 +120,8 @@ public class ViewBillsOrder extends javax.swing.JFrame {
         getContentPane().add(txtGetDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(348, 142, 348, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Change Order By ID");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(779, 145, -1, -1));
+        jLabel4.setText(" Order By ID");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 150, -1, -1));
 
         cbIncDesc.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         cbIncDesc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "INC", "DESC" }));
@@ -127,7 +130,7 @@ public class ViewBillsOrder extends javax.swing.JFrame {
                 cbIncDescActionPerformed(evt);
             }
         });
-        getContentPane().add(cbIncDesc, new org.netbeans.lib.awtextra.AbsoluteConstraints(964, 142, 313, -1));
+        getContentPane().add(cbIncDesc, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 140, 313, -1));
 
         jTable1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -145,16 +148,15 @@ public class ViewBillsOrder extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 1330, 474));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 1380, 550));
 
         jLabel2.setFont(new java.awt.Font("Algerian", 0, 36)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("*Click On Row To Open Bill");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(449, 698, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 790, -1, -1));
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/full-page-background.PNG"))); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/full-page-background.PNG.png"))); // NOI18N
         jLabel5.setText("jLabel5");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1440, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

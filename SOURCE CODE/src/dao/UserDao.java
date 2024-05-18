@@ -68,7 +68,7 @@ public class UserDao {
         ArrayList<User> arrayList = new ArrayList<>();
         
         try {
-            String query = "Select * from user where email like '%" + email + "%'";
+            String query = "Select * from user where name like '%" + email + "%' or email like '%" + email + "%'";
             ResultSet rs = DbOperations.getData(query);
             while(rs.next()){
                 User user = new User();

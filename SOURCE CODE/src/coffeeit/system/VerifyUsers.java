@@ -36,7 +36,7 @@ public class VerifyUsers extends javax.swing.JFrame {
             User userObj = itr.next();
             
             if(!userObj.getEmail().equals("IT@cock.li")){
-                dtm.addRow(new Object[] {userObj.getId(), userObj.getName(), userObj.getEmail(), userObj.getMobileNumber(), userObj.getAddress(), userObj.getSecurityQuestion(), userObj.getStatus()});
+                dtm.addRow(new Object[] {userObj.getId(), userObj.getName(), userObj.getEmail(), userObj.getMobileNumber(), userObj.getAddress(), userObj.getStatus()});
 
             }
         }
@@ -71,13 +71,13 @@ public class VerifyUsers extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/verify users.png"))); // NOI18N
-        jLabel1.setText("Verify Users");
+        jLabel1.setText("Manage Users");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 14, 140, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setForeground(new java.awt.Color(51, 51, 51));
         jLabel3.setText("Search");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(349, 119, 60, -1));
 
@@ -94,7 +94,7 @@ public class VerifyUsers extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Name", "Email", "Mobile Number", "Address", "SecurityQuestion", "Status"
+                "ID", "Name", "Email", "Mobile Number", "Address", "Status"
             }
         ));
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -104,12 +104,11 @@ public class VerifyUsers extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 156, 1278, 520));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 1278, 590));
 
         jLabel4.setFont(new java.awt.Font("Algerian", 0, 36)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("*Click to change Status");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 690, 480, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 790, 480, -1));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/close.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -119,7 +118,7 @@ public class VerifyUsers extends javax.swing.JFrame {
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1300, 20, -1, -1));
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/full-page-background.PNG"))); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/full-page-background.PNG.png"))); // NOI18N
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
@@ -147,7 +146,7 @@ public class VerifyUsers extends javax.swing.JFrame {
         TableModel model = jTable1.getModel();
         
         String email = model.getValueAt(index, 2).toString();
-        String status = model.getValueAt(index, 6).toString();
+        String status = model.getValueAt(index, 5).toString();
         
         
         if(status.equals("true")){

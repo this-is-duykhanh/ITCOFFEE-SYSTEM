@@ -562,7 +562,9 @@ public class PlaceOrder extends javax.swing.JFrame {
         } else {
             new reditPayment(txtTotal.getText().replace(",", "")).setVisible(true);
         }
-         btnReceipt.setEnabled(true);
+        
+        txtCash.setEditable(false);
+        btnReceipt.setEnabled(true);
     }//GEN-LAST:event_btnPayActionPerformed
 
     private void clear() {
@@ -579,6 +581,7 @@ public class PlaceOrder extends javax.swing.JFrame {
         txtPhoneNumber.setText("");
         btnReceipt.setEnabled(false);
         btnPay.setEnabled(false);
+        cdMethodPay.setSelectedIndex(0);
     }
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         // TODO add your handling code here:
@@ -597,7 +600,7 @@ public class PlaceOrder extends javax.swing.JFrame {
         String time = txtTime.getText();
         String createBy = userEmail;
         
-        String paymentMethod = cdMethodPay.getSelectedItem().equals("Cash")? "\nPayment methods: " + cdMethodPay.getSelectedItem() + " Taking: " + decimalFormat.format(Integer.parseInt(txtCash.getText())) + " Returning: " + txtChange.getText() : "\nPayment methods: " + cdMethodPay.getSelectedItem();
+        String paymentMethod = cdMethodPay.getSelectedItem().equals("Cash")? "\nPayment methods: " + cdMethodPay.getSelectedItem() + "\nTaking: " + decimalFormat.format(Integer.parseInt(txtCash.getText())) + " Returning: " + txtChange.getText() : "\nPayment methods: " + cdMethodPay.getSelectedItem();
         String customerDetails = txtCustomerName.getText().equals("") ? "Custommer details: Custommer tails" :  "Custommer details:" + txtCustomerName.getText() + " " + txtEmail.getText();
 
         Bill bill = new Bill();
@@ -631,7 +634,7 @@ public class PlaceOrder extends javax.swing.JFrame {
             document.add(cafeName);
             
 
-            Paragraph header = new Paragraph("94, Hamlet 1, Hoa Hiep Ward, Minh Hoa Commune, Dau Tieng District, Binh Duong Province\nHotline: 0357853366\nCASHIER: " + UserControler.getNameByEmail(userEmail) + "\n[ENT]\t" + date.split(",")[1] + " " + time + "\n" + customerDetails  + paymentMethod);
+            Paragraph header = new Paragraph("94, Hamlet 1, Hoa Hiep Ward, Minh Hoa Commune, Dau Tieng District, Binh Duong Province\nHotline: 0357853366\nCASHIER: " + UserControler.getNameByEmail(userEmail) + "\n[ENT]\t" + date.split(",")[1] + " " + time + "\n" + customerDetails );
             document.add(header);
 
             Paragraph startLine = new Paragraph("----------------------------------------------------------------------------------------------------------------------------------\n");
@@ -663,7 +666,10 @@ public class PlaceOrder extends javax.swing.JFrame {
             tb1.addCell(txtTotal.getText());
 
             document.add(tb1);
-
+            
+            Paragraph method = new Paragraph(paymentMethod);
+            document.add(method);
+            
             document.add(startLine);
 
             com.itextpdf.text.Image itextBarcodeImage = com.itextpdf.text.Image.getInstance(imageBarcode128, null);
@@ -757,7 +763,6 @@ public class PlaceOrder extends javax.swing.JFrame {
         txtTotal.setText(iTotal);
 
         Barcode128 barcode128 = new Barcode128();
-//            barcode128.setCodeType(Barcode128.CODE_A); 
         barcode128.setCode(String.valueOf(billId));
         imageBarcode128 = barcode128.createAwtImage(Color.BLACK, Color.WHITE);
         ImageIcon imageIconBarcode128 = new ImageIcon(imageBarcode128);
@@ -808,6 +813,7 @@ public class PlaceOrder extends javax.swing.JFrame {
         }
 
         if (cdMethodPay.getSelectedItem().equals("Cash")) {
+                txtCash.setEditable(true);
             if (txtCash.getText().equals("")) {
                 btnPay.setEnabled(false);
                 btnReceipt.setEnabled(false);
@@ -817,6 +823,8 @@ public class PlaceOrder extends javax.swing.JFrame {
             }
         } else {
             btnPay.setEnabled(true);
+            txtCash.setText("");
+            txtCash.setEditable(false);
         }
 
     }
